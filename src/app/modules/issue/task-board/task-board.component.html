@@ -1,0 +1,171 @@
+<div fxLayout="row wrap">
+    <!-- To Dos Column -->
+    <mat-card fxFlex>
+      <h4 fxLayout="row" class="ml-2 mt-2 text-bold-500">
+        <div>
+          <mat-icon class="primary" style="font-size: 25px;font-weight: 300">list</mat-icon>
+        </div> To Dos
+      </h4>
+      <div class="card" [dragula]='"status-bag"' [(dragulaModel)]='todo' id="statusId">
+        <ng-template ngFor let-todo [ngForOf]="rows">
+          <mat-card style="margin:0.5em;padding-top:0;padding-left:0;padding-right:0" class="example-card" *ngIf="todo.status.name =='New'">
+            <mat-card-title class="text-bold-500 primary">{{todo.project.name}}
+              <mat-icon style="padding:5px;float:right" color="primary">edit
+              </mat-icon>
+              <mat-icon style="padding:5px;float:right" color="warn">delete_outline</mat-icon>
+            </mat-card-title>
+            <mat-card-content style="padding:1em;">
+              <p>
+                {{todo.summary}}
+              </p>
+            </mat-card-content>
+            <mat-card-actions>
+              <img class="rounded-circle width-50 mr-2" src="../../../../assets/images/face4.jpg" />
+              <span class="primary mat-body-strong">May 17</span>
+            </mat-card-actions>
+          </mat-card>
+        </ng-template>
+      </div>
+    </mat-card>
+  
+  
+    <!--In Progress  Column -->
+    <mat-card fxFlex>
+      <h4 fxLayout="row" class="ml-2 mt-2 text-bold-500">
+        <div>
+          <mat-icon class="info" style="font-size: 25px;font-weight: 300">trending_up</mat-icon>
+        </div> In Progress
+      </h4>
+   
+      <div class="card" [dragula]='"status-bag"' [(dragulaModel)]='inProgress' id="statusId">
+        <ng-template ngFor let-todo [ngForOf]="rows">
+          <mat-card style="margin:0.5em;padding-top:0;padding-left:0;padding-right:0" class="example-card" *ngIf="todo.status.name =='In Progress'">
+            <mat-card-title class="text-bold-500 info">{{todo.project.name}}
+              <mat-icon style="padding:5px;float:right" color="primary">edit
+              </mat-icon>
+              <mat-icon style="padding:5px;float:right" color="warn">delete_outline</mat-icon>
+            </mat-card-title>
+            <mat-card-content style="padding:1em;">
+              <p>
+                {{todo.summary}}
+              </p>
+            </mat-card-content>
+            <mat-card-actions>
+              <img class="rounded-circle width-50 mr-2" src="../../../../assets/images/face4.jpg" /> <span class="primary mat-body-strong">May
+                17</span>
+            </mat-card-actions>
+          </mat-card>
+        </ng-template>
+      </div>
+    </mat-card>
+  
+    <!--Completed Column -->
+    <mat-card fxFlex>
+      <h4 fxLayout="row" class="ml-2 mt-2 text-bold-500">
+        <div>
+          <mat-icon class="success" style="font-size: 25px;font-weight: 300">thumb_up</mat-icon>
+        </div> Completed
+      </h4>
+    
+      <div class="card" [dragula]='"status-bag"' [(dragulaModel)]='completed' id="statusId">
+        <ng-template ngFor let-todo [ngForOf]="rows">
+          <mat-card style="margin:0.5em;padding-top:0;padding-left:0;padding-right:0" class="example-card" *ngIf="todo.status.name =='Completed'">
+                  <mat-card-title  class=" text-bold-500 primary">{{todo.project.name}}
+            <mat-icon style="padding:5px;float:right" color="primary">edit
+            </mat-icon>
+            <mat-icon style="padding:5px;float:right" color="warn">delete_outline</mat-icon>
+            </mat-card-title>
+            <mat-card-content style="padding:1em;">
+              <p>
+                {{todo.summary}}
+              </p>
+            </mat-card-content>
+            <mat-card-actions>
+              <img class="rounded-circle width-50 mr-2" src="../../../../assets/images/face4.jpg" /> <span class="success mat-body-strong">May
+                17</span>
+            </mat-card-actions>
+          </mat-card>
+        </ng-template>
+      </div>
+    </mat-card>
+  
+    <!--On Hold Column -->
+    <mat-card fxFlex>
+      <h4 fxLayout="row" class="ml-2 mt-2 text-bold-500">
+        <div>
+          <mat-icon class="warning" style="font-size: 25px;font-weight: 300">error_outline</mat-icon>
+        </div> On Hold
+      </h4>
+    
+      <div class="card" [dragula]='"status-bag"' [(dragulaModel)]='onHold' id="statusId">
+        <ng-template ngFor let-todo [ngForOf]="rows">
+          <mat-card style="margin:0.5em;padding-top:0;padding-left:0;padding-right:0" class="example-card" *ngIf="todo.status.name =='On Hold'">
+            <mat-card-title class="text-bold-500 warning ">{{todo.project.name}}
+              <mat-icon style="padding:5px;float:right" color="primary">edit
+              </mat-icon>
+              <mat-icon style="padding:5px;float:right" color="warn">delete_outline</mat-icon>
+            </mat-card-title>
+            <mat-card-content style="padding:1em;">
+              <p>
+                {{todo.summary}}
+              </p>
+            </mat-card-content>
+            <mat-card-actions>
+              <img class="rounded-circle width-50 mr-2" src="../../../../assets/images/face4.jpg" /> <span class="warning mat-body-strong">May
+                17</span>
+            </mat-card-actions>
+          </mat-card>
+        </ng-template>
+      </div>
+    </mat-card>
+  </div>
+  
+  
+  
+  <!-- <mat-card fxFlex>
+      <h4 fxLayout="row" class="ml-2 mt-2 text-bold-500">
+        <div>
+          <mat-icon color="primary">list</mat-icon>
+        </div> To Dos
+      </h4>
+      <div class="card" [dragula]='"first-bag"'>
+        <ng-template ngFor let-todo [ngForOf]="todos">
+          <div class="card-block pt-3">
+            <div class="clearfix">
+              <h5 class="text-bold-500 primary float-left">{{todo.title}}</h5>
+              <div class="actions float-right" fxLayout="row">
+                <div>
+                  <mat-icon color="primary">edit</mat-icon>
+                </div>
+                <div>
+                  <mat-icon color="warn">delete</mat-icon>
+                </div>
+              </div>
+            </div>
+            <p>{{todo.name}}</p>
+            <img class="rounded-circle width-50 mr-2" src="../../../../assets/images/face4.jpg"> <span class="primary">May
+              17</span>
+          </div>
+        </ng-template>
+      </div>
+    </mat-card> -->
+
+
+    <!-- <h3>Transfer Data via Drag Drop</h3>
+    <div class="row">
+        <div class="col-sm-3">
+            <ul class="list-group">
+                <li draggable *ngFor="let item of items" [dragData]="item" class="list-group-item" >{{item.name}}
+                </li>
+            </ul>
+        </div>
+        
+        <div class="col-sm-3">
+        <div class="panel panel-default" droppable (onDrop)="onItemDrop($event)">
+            <div class="panel-heading">Drop Items here</div>
+                <div class="panel-body">
+                    <li *ngFor="let item of items" class="list-group-item">{{item.name}}</li>
+                </div>
+            </div>
+        </div>
+    </div> -->

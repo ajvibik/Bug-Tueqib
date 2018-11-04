@@ -1,0 +1,116 @@
+<mat-card>
+  <mat-card-title><strong>Issue List</strong></mat-card-title>
+  <mat-form-field style="width: 100%" class="mb-1">
+    <input matInput placeholder="Type to filter the Issue..." required (keyup)='updateFilter($event)'>
+  </mat-form-field>
+  <ngx-datatable #myTable class='material striped' [columns]="columns" [columnMode]="'force'" [headerHeight]="50"
+    [footerHeight]="50" [rowHeight]="'auto'" [limit]="8" [rows]='rows' [selected]="selected"
+    [selectionType]="'single'"
+    (activate)="onActivate($event)"
+    (select)='detailpage($event)'>
+    <ngx-datatable-column name="#">
+        <ng-template let-rowIndex="rowIndex" let-row="row" let-value="value" ngx-datatable-cell-template>
+          {{rowIndex + 1}}
+        </ng-template>
+      </ngx-datatable-column>
+    <!-- <ngx-datatable-column name="Issue ID" (click)="detailpage(row)">
+      <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+        {{row['issueId']}}
+      </ng-template>
+    </ngx-datatable-column> -->
+    <ngx-datatable-column name="Issue ID">
+        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+          {{row['issueId']}}
+        </ng-template>
+      </ngx-datatable-column>
+
+    <ngx-datatable-column name="Project">
+      <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+        {{row['project']['name']}}
+      </ng-template>
+    </ngx-datatable-column>
+
+    <ngx-datatable-column name="Summary" [width]=200>
+      <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+        {{row['summary']}}
+      </ng-template>
+    </ngx-datatable-column>
+
+    <ngx-datatable-column name="Assert ID">
+      <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+        {{row['assertId']}}
+      </ng-template>
+    </ngx-datatable-column>
+
+    <ngx-datatable-column name="Assert Name">
+      <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+        {{row['assertName']}}
+      </ng-template>
+    </ngx-datatable-column>
+
+    <ngx-datatable-column name="Assigned">
+      <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+        {{row['assigned']['name']}}
+      </ng-template>
+    </ngx-datatable-column>
+
+    <ngx-datatable-column name="Reporter">
+      <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+        {{row['reporter']['name']}}
+      </ng-template>
+    </ngx-datatable-column>
+
+    <ngx-datatable-column name="Priority">
+      <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+        <mat-icon *ngIf="row['priority']['name'] === 'Showstopper'" color="warn">warning</mat-icon>
+        <mat-icon *ngIf="row['priority']['name'] === 'Critical'" color="warn">arrow_upward</mat-icon>
+        <mat-icon *ngIf="row['priority']['name'] === 'Medium'" color="accent">arrow_downward</mat-icon>
+        <mat-icon *ngIf="row['priority']['name'] === 'Low'" color="primary">arrow_downward</mat-icon>
+        {{row['priority']['name']}}
+      </ng-template>
+    </ngx-datatable-column>
+
+    <ngx-datatable-column name="Severity">
+      <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+        <mat-icon *ngIf="row['severity']['name'] === 'Critical'" color="warn">access_time</mat-icon>
+        <mat-icon *ngIf="row['severity']['name'] === 'Major'" color="theme">arrow_upward</mat-icon>
+        <mat-icon *ngIf="row['severity']['name'] === 'Moderate'" color="accent">arrow_downward</mat-icon>
+        <mat-icon *ngIf="row['severity']['name'] === 'Minor'" color="primary">arrow_downward</mat-icon>
+        {{row['severity']['name']}}
+      </ng-template>
+    </ngx-datatable-column>
+
+    <ngx-datatable-column name="Status">
+      <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+        {{row['status']['name']}}
+      </ng-template>
+    </ngx-datatable-column>
+
+    <ngx-datatable-column name="Created By">
+      <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+        {{row['createdBy'] | date:"dd/MMM/yyyy"}}
+      </ng-template>
+    </ngx-datatable-column>
+
+    <ngx-datatable-column name="Action">
+      <ng-template let-row="row" ngx-datatable-cell-template>
+        <mat-radio-group class="row">
+          <button mat-icon-button color="primary" (click)="editRow(row)">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-icon-button color="warn" (click)="deleteRow(row.$key)">
+            <mat-icon>delete_forever</mat-icon>
+          </button>
+        </mat-radio-group>
+      </ng-template>
+    </ngx-datatable-column>
+  </ngx-datatable>
+
+  <small *ngIf="deleteUserMsg" color="warn">Deleted Successfully.......</small>
+  <!-- <mat-chip-list [multiple]="true" [(ngModel)]="selectedColors" *ngIf="deleteUserMsg">
+    <mat-chip *ngFor="let aColor of availableColors" color="{{aColor.color}}" [value]="aColor.name" (remove)="removeColor(aColor)">
+      {{aColor.name}}
+      <mat-icon matChipRemove>cancel</mat-icon>
+    </mat-chip>
+  </mat-chip-list> -->
+</mat-card>

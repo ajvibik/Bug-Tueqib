@@ -1,0 +1,312 @@
+<form [formGroup]="this.invoiceService.form"  (ngSubmit)="addInvoice()">
+<input type="hidden" formControlName="$key">
+<mat-card>
+  <mat-tab-group class="demo-tab-group">
+    <mat-tab *ngFor="let tab of tabs">
+      <ng-template mat-tab-label>{{tab.label}}</ng-template>
+      <div class="tab-content">
+        <div *ngIf="tab.show == 'invoice'">
+          <!-- <mat-card>
+                    <mat-card-content class="demo-basic-list">
+                      <mat-grid-list cols="2" rowHeight="80">
+                        <mat-grid-tile> One </mat-grid-tile>
+                        <mat-grid-tile> Two </mat-grid-tile>
+                        <mat-grid-tile> Three </mat-grid-tile>
+                        <mat-grid-tile> Four </mat-grid-tile>
+                      </mat-grid-list>
+                    </mat-card-content>
+                  </mat-card> -->
+
+          <mat-card id="contentToConvert" #invoice>
+            <mat-card-content>
+              <div class="mb-1">
+                <div fxFlex.gt-xs="65" fxFlex="100">
+                  <div fxLayout="column">
+                    <img src="../../../assets/images/ddcinvoice.png" alt="" width="400px"/>
+                  </div>
+                </div>
+                <div fxFlex.gt-xs="5" fxFlex="100"></div>
+                <div fxFlex.gt-xs="30" fxFlex="100" class="text-sm-right text-xs-left">
+                  <div fxLayout="column">
+                    <h2 fxLayoutAlign="center"><u><strong>TAX INVOICE</strong></u></h2>
+                    <mat-grid-list cols="2" rowHeight="20">
+                      <mat-grid-tile ><strong>Invoice NO </strong> </mat-grid-tile>
+                      <mat-grid-tile> <input matInput formControlName="invoice_no" placeholder="eg:- 123456"> </mat-grid-tile>
+                      <mat-grid-tile> <strong>Invoice Date </strong></mat-grid-tile>
+                      <mat-grid-tile>
+                         <!-- <input matInput formControlName="invoice_date" placeholder="eg:- 22-10-2018">  -->
+                        <mat-form-field fxFlex="90">
+                          <input matInput formControlName="invoice_date" [matDatepicker]="minDatePicker"> 
+                          <mat-datepicker-toggle matSuffix [for]="minDatePicker"></mat-datepicker-toggle>
+                          <mat-datepicker #minDatePicker ></mat-datepicker>
+                        </mat-form-field></mat-grid-tile>
+                      <mat-grid-tile> <strong>Page No </strong></mat-grid-tile>
+                      <mat-grid-tile> <input matInput formControlName="page_no" placeholder="eg:-1"> </mat-grid-tile>
+                    </mat-grid-list>
+                  </div>
+                </div>
+              </div>
+
+              <div fxLayout="row wrap" formGroupName="customer_info">
+                <div fxFlex.gt-xs="65" fxFlex="100" style="border:2px black solid;">
+                  <div fxLayout="column">
+                      <mat-grid-list  [cols]="2" rowHeight="20">
+                        <mat-grid-tile> <div class="text-inside-grid"><strong>Bill To</strong> </div></mat-grid-tile>
+                        <mat-grid-tile> <input matInput formControlName="address1" placeholder="address"> </mat-grid-tile>
+                        <mat-grid-tile> <div class="text-inside-grid"><strong></strong> </div></mat-grid-tile>
+                        <mat-grid-tile> <input matInput formControlName="address2" value="Abu Dhabi"> </mat-grid-tile>
+                        <mat-grid-tile> <div class="text-inside-grid"><strong></strong> </div> </mat-grid-tile>
+                        <mat-grid-tile> <input matInput formControlName="address3" value="UAE"> </mat-grid-tile>
+                        <mat-grid-tile> <div class="text-inside-grid"><strong>TRN NO</strong> </div> </mat-grid-tile>
+                        <mat-grid-tile><input matInput formControlName="trn_no" placeholder="eg:-1832848767326s"></mat-grid-tile>
+                      </mat-grid-list>
+                    </div>
+                </div>
+                <div fxFlex.gt-xs="5" fxFlex="100"></div>
+                <div fxFlex.gt-xs="30" fxFlex="100" class="text-sm-right text-xs-left" style="border:2px black solid;">
+                  <div fxLayout="column">
+                      <mat-grid-list cols="2" rowHeight="20">
+                        <mat-grid-tile>  <div class="text-inside-grid"><strong>Customer PO</strong></div> </mat-grid-tile>
+                        <mat-grid-tile> <input matInput formControlName="customer_PO" placeholder="123456"> </mat-grid-tile>
+                        <mat-grid-tile> <div class="text-inside-grid"><strong>Payment Terms</strong></div></mat-grid-tile>
+                        <mat-grid-tile> <input matInput formControlName="payment_Terms" placeholder="30 days"> </mat-grid-tile>
+                        <mat-grid-tile> <div class="text-inside-grid"><strong>Contact Person</strong></div> </mat-grid-tile>
+                        <mat-grid-tile> <input matInput formControlName="contact_Person" placeholder="Joseph Vibik"> </mat-grid-tile>
+                        <mat-grid-tile> <div class="text-inside-grid"><strong>Sales Incharge</strong></div> </mat-grid-tile>
+                        <mat-grid-tile>
+                           <mat-form-field class="right">
+                            <mat-select formControlName="sales_Incharge" placeholder="select">
+                              <mat-option *ngFor="let inc of incharge" [value]="inc.value">
+                                {{inc.viewValue}}
+                              </mat-option>
+                            </mat-select>
+                          </mat-form-field> 
+                        </mat-grid-tile>
+                      </mat-grid-list>
+                    </div>
+                </div>
+              </div>
+            </mat-card-content>
+            <br>
+
+            <!-- <mat-card-content formArrayName="items" class="pl-0 pr-0">
+              <ngx-datatable  *ngFor="let item of form.get('items').controls; let i=index;" [formGroupName]="i" class="material"  [columnMode]="'flex'" [headerHeight]="50"
+                [footerHeight]="0" [rowHeight]="'auto'">
+                <span matPrefix><button  (click)="removeItem(item)">
+                    <mat-icon  class="demo-drink-icon">clear</mat-icon>
+                  </button> {{i + 1}}. &nbsp;</span> 
+                <ngx-datatable-column name="Description" [flexGrow]="4">
+                  <ng-template ngx-datatable-cell-template let-row="row">
+                      <input matInput formControlName="name" placeholder="ghvhvhv">
+                      <span matPrefix><button  matIconButton (click)="removeItem(item)">
+                          <mat-icon class="md-24" aria-label="remove">clear</mat-icon>
+                        </button> {{i + 1}}. &nbsp;</span>
+                      <input class="form-control" matInput formControlName="name">
+                  </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column name="Unit Price" [flexGrow]="1">
+                  <ng-template ngx-datatable-cell-template let-row="row">
+                      <input matInput formControlName="unit" placeholder="jbjbjb">
+                    <strong>{{row.price | currency:'USD':'symbol':'1.2-2'}}</strong> 
+                  </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column name="Quantity" [flexGrow]="1">
+                  <ng-template ngx-datatable-cell-template let-row="row">
+                      <input matInput formControlName="qty" placeholder="mjbjbj">
+                     <strong>{{row.quantity}}</strong> 
+                  </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column name="Amount" [flexGrow]="1">
+                  <ng-template ngx-datatable-cell-template let-row="row">
+                      <input matInput formControlName="cost" placeholder="kjbkjbjkbjb">
+                    <strong>{{ (row.price * row.quantity) | currency:'USD':'symbol':'1.2-2'}}</strong> 
+                  </ng-template>
+                </ngx-datatable-column>
+              </ngx-datatable>
+            </mat-card-content> -->
+
+
+            <div fxLayout.xs="column" style="font-weight: bolder">
+                <div fxFlex="50">Name</div>
+                <div fxFlex="10">Qty</div>
+                <div fxFlex="20">Unit Price</div>
+                <div fxFlex="20" style="text-align: right">Total</div>
+              </div>
+
+            <div formArrayName="items" style="font-weight: bolder; text-align: center">
+                <div fxLayout.xs="column"
+                    *ngFor="let item of this.invoiceService.form.get('items').controls; let i=index; let odd=odd;" [formGroupName]="i"
+                    [ngClass]="{odd_row: odd}">
+                  <mat-form-field fxFlex="50">
+                      <span matPrefix> <button mat-icon-button color="warn" (click)="removeItem(item)">
+                          <mat-icon style="font-size: 25px">delete_forever</mat-icon>
+                        </button>{{i + 1}}. &nbsp;</span>
+                    <input class="form-control" matInput formControlName="name">
+                  </mat-form-field>
+                  <mat-form-field mdInput fxFlex="10">
+                    <input class="form-control" matInput type="number" formControlName="qty" >
+                  </mat-form-field>
+                  <mat-form-field fxFlex="20">
+                    <input class="form-control" matInput type="number" formControlName="cost">
+                  </mat-form-field>
+                  <mat-form-field fxFlex="20">
+                    <input class="right_placeholder" matInput  formControlName="total" value={{getTotal()}} disabled>
+                  </mat-form-field>
+        
+                </div>
+              </div>
+              <div fxLayout="row">
+                
+                <span matPrefix> <button mat-icon-button color="primary" (click)="addItem()">
+                  <mat-icon>add_circle</mat-icon>
+                </button></span>
+              </div>
+
+            <hr>
+           
+            <mat-card-content>
+              <div fxLayout="row wrap">
+                <div fxFlex.gt-sm="25" fxFlex.gt-xs="50" fxFlex="100" class="mt-1 mb-1">
+                  <h6 class="text-uppercase text-md ma-0 text-bold">Subtotal</h6>
+                  <h1 class="ma-0">{{getSubTotal() | currency:'AED ':'symbol':'1.2-2'}}</h1>
+                </div>
+                <div fxFlex.gt-sm="25" fxFlex.gt-xs="50" fxFlex="100" class="mt-1 mb-1 text-sm-right text-md-left">
+                  <h6 class="text-uppercase text-md ma-0 text-bold">VAT {{this.invoiceService.form.get('taxPercent').value}} %</h6>
+                  <h1 class="ma-0">{{getCalculatedTax() | currency:'AED ':'symbol':'1.2-2'}}</h1>
+                </div>
+                <div fxFlex.gt-sm="25" fxFlex.gt-xs="50" fxFlex="100" class="mt-1 mb-1">
+                  <h6 class="text-uppercase text-md ma-0 text-bold">Discount</h6>
+                  <h1 class="ma-0">AED 0.00</h1>
+                </div>
+                <div fxFlex.gt-sm="25" fxFlex.gt-xs="50" fxFlex="100" class="mt-1 mb-1 text-xs-left text-sm-right">
+                  <h6 class="text-uppercase text-sm ma-0 text-bold">Total</h6>
+                  <h1 class="ma-0 mat-text-accent">{{ getTotal() | currency:'AED ':'symbol':'1.2-2'}}</h1>
+                </div>
+              </div>
+            </mat-card-content>
+            <hr>
+
+            <mat-card-content>
+              <p class="text-md">
+                <strong>
+                  PAYMENT TERMS AND POLICIES
+                </strong>
+                All accounts are to be paid within 7 days from receipt of invoice. To be paid by cheque or credit card
+                or direct payment online. If account is not paid within 7 days the credits details supplied as
+                confirmation of work undertaken will be charged the agreed
+                quoted fee noted above. If the Invoice remails unpaid. our dept recovery agency, Urban, may charge you
+                a fee of 25% of the unpaid portion of the
+                invoice amount and other legal and collection costs not covered by the fee.
+              </p>
+            </mat-card-content>
+          </mat-card>
+        </div>
+
+
+
+        <div *ngIf="tab.show == 'note'">
+          <mat-card>
+            <mat-card-content>
+              <div class="mb-1">
+                <h1 class="mt-0"><strong>INVOICE</strong></h1>
+                <a href="javascript:;">company@address.com</a>
+              </div>
+
+              <div fxLayout="row wrap">
+                <div fxFlex.gt-xs="50" fxFlex="100">
+                  <h4 class="my-0">Client</h4>
+                  <div fxLayout="column">
+                    <span>Invoice No: #0001</span>
+                    <span>Date issued: 01 Jun 2017</span>
+                    <span>Due date: 31 May 2017</span>
+                  </div>
+                </div>
+                <div fxFlex.gt-xs="50" fxFlex="100" class="text-sm-right text-xs-left">
+                  <h4 class="my-0">Company LLC</h4>
+                  <div fxLayout="column">
+                    <span>company@address.com</span>
+                    <span>1234 Main</span>
+                    <span>Apt. 4B</span>
+                    <span>Springfield, ST 54321</span>
+                  </div>
+                </div>
+              </div>
+            </mat-card-content>
+
+            <mat-card-content formArrayName="items" class="pl-0 pr-0">
+              <ngx-datatable class="material" [rows]="this.invoiceService.form.get('items').controls" [columnMode]="'flex'" [headerHeight]="50"
+                [footerHeight]="0" [rowHeight]="'auto'">
+                <ngx-datatable-column name="Description" [flexGrow]="4">
+                  <ng-template ngx-datatable-cell-template let-row="row">
+                    <strong>{{row.title}}</strong><br /><span class="mat-text-muted">{{row.subtitle}}</span>
+                  </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column name="Unit Price" [flexGrow]="1">
+                  <ng-template ngx-datatable-cell-template let-row="row">
+                    <strong>{{row.price | currency:'AED':'symbol':'1.2-2'}}</strong>
+                  </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column name="Quantity" [flexGrow]="1">
+                  <ng-template ngx-datatable-cell-template let-row="row">
+                    <strong>{{row.quantity}}</strong>
+                  </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column name="Amount" [flexGrow]="1">
+                  <ng-template ngx-datatable-cell-template let-row="row">
+                    <strong>{{ (row.price * row.quantity) | currency:'AED':'symbol':'1.2-2'}}</strong>
+                  </ng-template>
+                </ngx-datatable-column>
+              </ngx-datatable>
+            </mat-card-content>
+
+            <hr>
+            <mat-card-content>
+              <div fxLayout="row wrap">
+                <div fxFlex.gt-sm="25" fxFlex.gt-xs="50" fxFlex="100" class="mt-1 mb-1">
+                  <h6 class="text-uppercase text-md ma-0 text-bold">Subtotal</h6>
+                  <h1 class="ma-0">{{getSubTotal() | currency:'AED':'symbol':'1.2-2'}}</h1>
+                </div>
+                <div fxFlex.gt-sm="25" fxFlex.gt-xs="50" fxFlex="100" class="mt-1 mb-1 text-sm-right text-md-left">
+                  <h6 class="text-uppercase text-md ma-0 text-bold">Tax (15%)</h6>
+                  <h1 class="ma-0">{{getCalculatedTax() | currency:'AED':'symbol':'1.2-2'}}</h1>
+                </div>
+                <div fxFlex.gt-sm="25" fxFlex.gt-xs="50" fxFlex="100" class="mt-1 mb-1">
+                  <h6 class="text-uppercase text-md ma-0 text-bold">Discount</h6>
+                  <h1 class="ma-0">AED 0.00</h1>
+                </div>
+                <div fxFlex.gt-sm="25" fxFlex.gt-xs="50" fxFlex="100" class="mt-1 mb-1 text-xs-left text-sm-right">
+                  <h6 class="text-uppercase text-sm ma-0 text-bold">Total</h6>
+                  <h1 class="ma-0 mat-text-accent">{{ getTotal() | currency:'AED':'symbol':'1.2-2'}}</h1>
+                </div>
+              </div>
+            </mat-card-content>
+            <hr>
+
+            <mat-card-content>
+              <p class="text-md">
+                <strong>
+                  PAYMENT TERMS AND POLICIES
+                </strong>
+                All accounts are to be paid within 7 days from receipt of invoice. To be paid by cheque or credit card
+                or direct payment online. If account is not paid within 7 days the credits details supplied as
+                confirmation of work undertaken will be charged the agreed
+                quoted fee noted above. If the Invoice remails unpaid. our dept recovery agency, Urban, may charge you
+                a fee of 25% of the unpaid portion of the
+                invoice amount and other legal and collection costs not covered by the fee.
+              </p>
+            </mat-card-content>
+          </mat-card>
+        </div>
+      </div>
+    </mat-tab>
+  </mat-tab-group>
+</mat-card>
+
+<mat-card-actions  layout = "row" layout-sm = "column" layout-align = "center center">
+    <button mat-raised-button color="primary" [disabled]="false" *ngIf="!this.invoiceService.form.get('$key').value" [disabled]="!this.invoiceService.form.valid"><i class="material-icons">save</i>Save</button>
+    <button mat-raised-button  *ngIf="false" color="primary" type="submit" disabled="false" (click)="printInvoice()">Print</button>
+    <button mat-raised-button *ngIf="true" class="btn btn-info" [disabled]="false" (click)="generatePDF()">PDF</button>
+    <button mat-raised-button color="warn" (click)="clearInvoice()">Clear</button>
+  </mat-card-actions>
+</form>
+

@@ -1,0 +1,30 @@
+	<!-- <div class="se-pre-con"></div> -->
+	<div class="bgimg" ng-init="login=true" ng-show="login">
+    <div class="row" >
+      <div class="col-sm-7 col-md-7 col-lg-7 ">
+        <img class ="logoprp" src="../../../../assets/images/ddc.png" />
+      </div>
+      <div class="col-sm-5 col-md-5 col-lg-5">
+        <div class="login pull-right">
+          <h1>Login</h1>
+          <form method="post" (ngSubmit)="LoginFn(userName.value,password.value,role.value)">
+            <input type="text" class="form-control" placeholder="Username"  #userName ngModel name="userName"/>
+            <input type="password" class="form-control"  placeholder="Password"  #password ngModel name="password"/>
+            <select class="form-control"  #role ngModel name="role">
+              <option value="" >---Select---</option>
+              <option>Admin</option>
+              <option>User</option>
+            </select>
+            <button class="btn btn-lg btn-primary btn-block"  >Sign in <i class="fa fa-sign-in" aria-hidden="true"></i></button>
+          </form>
+        </div>
+      </div>
+    </div>
+    </div>
+
+    <!-- <app-register-user></app-register-user> -->
+    
+  
+  
+  
+  

@@ -1,0 +1,25 @@
+<table class="table table-sm">
+    <thead>
+        <th>Name</th>
+        <th>E-mail</th>
+        <th>Phone</th>
+		<th>Password</th>
+    </thead>
+    <ng-container *ngFor="let user of UserArray">
+        <tbody>
+            <tr>
+                <td>{{user.name}}</td>
+                <td>{{user.email}}</td>
+                <td>{{user.phone}}</td>
+				<td>{{user.password}}</td>
+                <td>
+                    <button class="btn btn-outline-info" (click)="editRow(user)">Edit</button>
+                    <button class="btn btn-outline-danger" (click)="deleteRow(user.$key)">Delete</button>
+                </td>
+            </tr>
+        </tbody>
+    </ng-container>
+</table>
+<div class="alert alert-danger" *ngIf="deleteUserMsg">
+    Deleted Successfully!!!
+</div>

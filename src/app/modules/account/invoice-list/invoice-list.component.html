@@ -1,0 +1,41 @@
+<mat-card>
+    <mat-card-title><strong>Issue List</strong></mat-card-title>
+    <mat-form-field style="width: 100%" class="mb-1">
+      <input matInput placeholder="Type to filter the Issue..." required (keyup)='updateFilter($event)'>
+    </mat-form-field>
+    <ngx-datatable #myTable class='material striped' [columns]="columns" [columnMode]="'force'" [headerHeight]="50"
+      [footerHeight]="50" [rowHeight]="'auto'" [limit]="8" [rows]='rows' [selected]="selected"
+      [selectionType]="'single'"
+      (activate)="onActivate($event)"
+      (select)='detailpage($event)'>
+      <ngx-datatable-column name="#">
+          <ng-template let-rowIndex="rowIndex" let-row="row" let-value="value" ngx-datatable-cell-template>
+            {{rowIndex + 1}}
+          </ng-template>
+        </ngx-datatable-column>
+      <ngx-datatable-column name="Invoice No">
+        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+          {{row['invoice_no']}}
+        </ng-template>
+      </ngx-datatable-column>
+  
+      <ngx-datatable-column name="Contact Person">
+          <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+            {{row['customer_info']['contact_Person']}}
+          </ng-template>
+        </ngx-datatable-column>
+
+      <ngx-datatable-column name="Customer PO">
+        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+          {{row['customer_info']['customer_PO']}}
+        </ng-template>
+      </ngx-datatable-column>
+  
+      <ngx-datatable-column name="grantTotal" [width]=200>
+        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+          AED {{row['grantTotal']}}
+        </ng-template>
+      </ngx-datatable-column>
+      
+    </ngx-datatable>
+  </mat-card>

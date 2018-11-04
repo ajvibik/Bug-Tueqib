@@ -1,0 +1,121 @@
+:host {
+    md-list-item {
+      display: block;
+    }
+    .gu-mirror {
+      transition: opacity 300ms ease-in-out;
+      border-radius: 2px;
+      display: block;
+      position: relative;
+      display: block;
+      padding: 10px 15px;
+      margin-bottom: -1px;
+      background-color: #fff;
+    }
+    .mat-list-item {
+      cursor: move;
+      cursor: grab;
+      cursor: -moz-grab;
+      cursor: -webkit-grab;
+    }
+    .gu-mirror {
+      cursor: grabbing;
+      cursor: -moz-grabbing;
+      cursor: -webkit-grabbing;
+    }
+    .container .ex-moved {
+      background-color: #e74c3c;
+    }
+    .container.ex-over {
+      background-color: rgba(255, 255, 255, 0.3);
+    }
+    .handle {
+      padding: 0 5px;
+      margin-right: 5px;
+      background-color: rgba(0, 0, 0, 0.4);
+      cursor: move;
+    }
+    nested-repeat-example .container span {
+      display: block;
+      padding: 8px;
+    }
+  }
+  .card .card-block {
+    padding: .5rem 1.5rem 1.5rem;
+    cursor: move;
+    cursor: grab;
+    cursor: -moz-grab;
+    cursor: -webkit-grab;
+}
+
+
+
+.pt-3, .py-3 {
+    padding-top: 1.5rem!important;
+}
+.card {
+    font-size: 1rem;
+    font-weight: 400;
+}
+.text-bold-500 {
+    font-weight: 500;
+}
+.primary {
+    color: #009da0!important;
+}
+.warning {
+    color: #ff8d60!important;
+}
+.success {
+    color: #0cc27e!important;
+}
+.info {
+    color: #1cbcd8!important;
+}
+.float-left {
+    float: left!important;
+}
+.h5, h5 {
+    font-size: 1.25rem;
+}
+.width-50 {
+    width: 50px!important;
+}
+mat-icon{
+    font-size:5 px;
+}
+.text-bold-500 {
+    font-weight: 500;
+}
+.ml-2, .mx-2 {
+    margin-left: .75rem!important;
+}
+.mt-2, .my-2 {
+    margin-top: .75rem!important;
+}
+.h4, h4 {
+    font-size: 1.5rem;
+}
+.h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
+    font-family: Montserrat,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+    font-weight: 300;
+    line-height: 1.15em;
+}
+.h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
+    margin-bottom: .75rem;
+    color: inherit;
+}
+mat-icon{
+    font-size: 15px;
+  }
+mat-card{
+    padding: .5rem 1.5rem 1.5rem;
+    cursor: move;
+    cursor: grab;
+    cursor: -moz-grab;
+    cursor: -webkit-grab;
+}
+mat-card-title{
+    background:rgba(0,0,0,.06);
+    padding:12px 12px;
+}

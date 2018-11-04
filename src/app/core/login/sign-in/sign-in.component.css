@@ -1,0 +1,80 @@
+div.bgimg
+{
+  	background-image: url('https://pas-wordpress-media.s3.amazonaws.com/wp-content/uploads/2014/02/8-Tips-For-Getting-into-Retail-Channels.jpg');
+			background-repeat: no-repeat;
+			background-size: cover;
+			width: 100%;
+			height: 100%;
+            font-family: 'Open Sans', sans-serif;
+            position: fixed
+}
+    
+.logoprp{
+    width: 100%;
+			height: 100%;
+}
+		.login {
+			width: 300px;
+			height: 300px;
+		}
+		
+		.login h1 {
+			color: #fff;
+			text-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+			letter-spacing: 1px;
+		}
+		
+		input,
+		select {
+			width: 100%;
+			margin-bottom: 10px;
+			border: none;
+			padding: 10px;
+			font-size: 13px;
+			opacity: 0.5;
+			text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
+			border: 1px solid rgba(0, 0, 0, 0.3);
+			border-radius: 2px;
+			box-shadow: inset 0 -5px 45px rgba(100, 100, 100, 0.2), 0 1px 1px rgba(255, 255, 255, 0.2);
+			-webkit-transition: box-shadow .5s ease;
+			-moz-transition: box-shadow .5s ease;
+			-o-transition: box-shadow .5s ease;
+			-ms-transition: box-shadow .5s ease;
+			transition: box-shadow .5s ease;
+      
+		}
+		
+		input:focus,
+		select:focus {
+			box-shadow: inset 0 -5px 45px rgba(100, 100, 100, 0.4), 0 1px 1px rgba(255, 255, 255, 0.2);
+		}
+		
+
+		.row {
+			padding-top: 100px;
+      margin-bottom: 302px;
+		}
+		
+		.no-js #loader {
+			display: none;
+		}
+		
+		.js #loader {
+			display: block;
+			position: absolute;
+			left: 100px;
+			top: 0;
+		}
+		
+		.se-pre-con {
+			position: fixed;
+			left: 0px;
+			top: 0px;
+			width: 100%;
+			height: 100%;
+			z-index: 9999;
+			background: url('../../../../assets/images/Preloader.gif') 50% 50% no-repeat rgb(249, 249, 249);
+    }
+		
+
+

@@ -1,0 +1,47 @@
+<div class="row">
+  <div class="col-md-6">
+    <form [formGroup]="this.userService.form" (ngSubmit)="addUser()">
+      <input type="hidden" formControlName="$key">
+      <div class="form-group">
+        <label>User Name</label>
+        <input type="text" class="form-control" formControlName="name" [ngClass]="{'is-valid':submitted && formControls.name.errors}">
+        <div class="invalid-feedback" *ngIf="submitted && formControls.name.errors">
+          This field is required.
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Email ID</label>
+        <input type="email" class="form-control" formControlName="email" [ngClass]="{'is-valid':submitted && formControls.email.errors}">
+        <div class="invalid-feedback" *ngIf="submitted && formControls.email.errors">
+          This field is required.
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Phone Number</label>
+        <input type="number" class="form-control" formControlName="phone" [ngClass]="{'is-valid':submitted && formControls.phone.errors}">
+        <div class="invalid-feedback" *ngIf="submitted && formControls.phone.errors">
+            <label *ngIf="submitted && formControls.phone.errors.required">This field is required.</label>
+            <label *ngIf="submitted && formControls.phone.errors.minlength">This field need atleast 8 numbers</label>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Password</label>
+        <input type="password" class="form-control" formControlName="password" [ngClass]="{'is-valid':submitted && formControls.password.errors}">
+        <div class="invalid-feedback" *ngIf="submitted && formControls.password.errors">
+            <label *ngIf="submitted && formControls.password.errors.required">This field is required.</label>
+            <label *ngIf="submitted && formControls.password.errors.minlength">This field need atleast 8 numbers</label>
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <button class="btn btn-outline-primary" value="Submit">Register</button>
+      </div>
+    </form>
+    <div class="alert alert-info" *ngIf="showSuccessMsg">
+      Submitted Successsfully
+    </div>
+  </div>
+  <div class="col-md-6">
+    <app-user></app-user>
+  </div>
+</div>

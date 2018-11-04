@@ -1,0 +1,128 @@
+<mat-card>
+    <mat-card-title><strong>Create Issue</strong></mat-card-title>
+    <form [formGroup]="this.issueService.form" (ngSubmit)="addIssue()">
+      <input type="hidden" formControlName="$key">
+      <mat-card-content>
+        <div class="mb-1">
+          <mat-form-field style="width:50%" appearance="outline">
+            <mat-label>Project</mat-label>
+            <mat-select placeholder="Project" formControlName="project">
+              <mat-option>None</mat-option>
+              <mat-option *ngFor="let pro of projects" [value]="pro"> {{ pro.name }}</mat-option>
+            </mat-select>
+            <mat-icon matPrefix class="demo-drink-icon">work_outline</mat-icon>
+          </mat-form-field>
+          <br>
+          <small *ngIf="formControls['project'].hasError('required') && formControls['project'].touched" class="mat-text-warn">You
+            must include the project</small>
+        </div>
+  
+  
+        <div class="mb-1">
+          <mat-form-field style="width: 100%" appearance="outline">
+            <mat-label>Summary</mat-label>
+            <textarea matInput placeholder="Summary" formControlName="summary"></textarea>
+          </mat-form-field>
+          <small *ngIf="formControls['summary'].hasError('required') && formControls['summary'].touched" class="mat-text-warn">You
+            must include the summary of the issue.</small>
+        </div>
+  
+        <div fxLayout="row wrap">
+          <div class="mb-1">
+            <mat-form-field style="width: 100%" appearance="outline">
+              <mat-label>Assigned</mat-label>
+              <mat-select placeholder="Assigned" formControlName="assigned">
+                <mat-option>None</mat-option>
+                <mat-option *ngFor="let assign of assignedTo" [value]="assign"> {{ assign.name }}</mat-option>
+              </mat-select>
+              <mat-icon matPrefix class="demo-drink-icon">person</mat-icon>
+            </mat-form-field>
+            <small *ngIf="formControls['assigned'].hasError('required') && formControls['assigned'].touched" class="mat-text-warn">You
+              must select the Assigned user</small>
+          </div> &nbsp;
+  
+          <div class="mb-1">
+            <mat-form-field style="width: 100%" appearance="outline">
+              <mat-label>Reporter</mat-label>
+              <mat-select placeholder="Reporter"  formControlName="reporter">
+                <mat-option>None</mat-option>
+                <mat-option *ngFor="let report of reporter" [value]="report"> {{ report.name }}</mat-option>
+              </mat-select>
+              <mat-icon matPrefix class="demo-drink-icon">person</mat-icon>
+            </mat-form-field>
+            <small *ngIf="formControls['reporter'].hasError('required') && formControls['reporter'].touched" class="mat-text-warn">You
+              must select the Reporter for this issue</small>
+          </div> &nbsp;
+  
+          <div class="mb-1">
+            <mat-form-field style="width: 100%" appearance="outline">
+              <mat-label>Assert Id</mat-label>
+              <input matInput placeholder="Assert Id" formControlName="assertId">
+            </mat-form-field>
+            <small *ngIf="formControls['assertId'].hasError('required') && formControls['assertId'].touched" class="mat-text-warn">Enter
+              the assert id</small>
+          </div> &nbsp;
+  
+          <div class="mb-1">
+            <mat-form-field style="width: 100%" appearance="outline">
+              <mat-label>Assert Name</mat-label>
+              <input matInput placeholder="Assert Name" formControlName="assertName">
+            </mat-form-field>
+            <small *ngIf="formControls['assertName'].hasError('required') && formControls['assertName'].touched" class="mat-text-warn">Enter
+              the Assert Name</small>
+          </div>
+        </div>
+  
+        <div class="mb-1">
+          <mat-form-field style="width: 100%" appearance="outline">
+            <mat-label>Status</mat-label>
+            <mat-select placeholder="Status"  formControlName="status">
+              <mat-option>None</mat-option>
+              <mat-option *ngFor="let state of status" [value]="state"> {{ state.name }}</mat-option>
+            </mat-select>
+            <mat-icon matPrefix class="demo-drink-icon">bug_report</mat-icon>
+          </mat-form-field>
+          <small *ngIf="formControls['status'].hasError('required') && formControls['status'].touched" class="mat-text-warn">You
+            must include the status of the issue.</small>
+        </div>
+  
+        <div fxLayout="row wrap">
+          <div class="mb-1">
+            <mat-form-field style="width: 100%" appearance="outline">
+              <mat-label>Severity</mat-label>
+              <mat-select placeholder="Severity" formControlName="severity">
+                <mat-option>None</mat-option>
+                <mat-option *ngFor="let data of severity" [value]="data"> {{ data.name }}</mat-option>
+              </mat-select>
+              <mat-icon matPrefix class="demo-drink-icon">priority_high</mat-icon>
+            </mat-form-field>
+            <small *ngIf="formControls['severity'].hasError('required') && formControls['severity'].touched" class="mat-text-warn">You
+              must select the severity for this issue</small>
+          </div> &nbsp;
+  
+          <div class="mb-1">
+            <mat-form-field style="width: 100%" appearance="outline">
+              <mat-label>Priority</mat-label>
+              <mat-select placeholder="Priority" formControlName="priority">
+                <mat-option>None</mat-option>
+                <mat-option *ngFor="let data of priority" [value]="data"> {{ data.name }}</mat-option>
+              </mat-select>
+              <mat-icon matPrefix class="demo-drink-icon">low_priority</mat-icon>
+            </mat-form-field>
+            <small *ngIf="formControls['priority'].hasError('required') && formControls['priority'].touched" class="mat-text-warn">You
+              must select the priority for this issue</small>
+          </div>
+        </div>
+      </mat-card-content>
+      <hr>
+      <mat-card-actions >
+        <button mat-raised-button  *ngIf="!this.issueService.form.get('$key').value" color="primary" type="submit" [disabled]="!this.issueService.form.valid">Submit</button>
+        <button mat-raised-button *ngIf="this.issueService.form.get('$key').value" color="primary" [disabled]="!this.issueService.form.valid">Update</button>
+        <button mat-raised-button color="warn" (click)="clearForm()">Clear</button>
+      </mat-card-actions>
+    </form>
+  
+    <div class="alert alert-info" *ngIf="showSuccessMsg">
+      Created Successsfully
+    </div>
+  </mat-card>
